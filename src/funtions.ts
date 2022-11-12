@@ -1,0 +1,9 @@
+const add = (a: number, b: number) => a + b;
+
+const printOutput: (a: number | string) => void = (output) =>
+  console.log(output);
+
+const button = document.querySelector("button");
+button?.addEventListener("click", (event) => console.log(`Hui ${event}`));
+
+printOutput(add(4, 2));
