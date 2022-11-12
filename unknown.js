@@ -1,6 +1,7 @@
-var userInput;
-var anyUserInput;
-var userName;
+"use strict";
+let userInput;
+let anyUserInput;
+let userName;
 userInput = "ss";
 console.log(typeof userInput);
 if (typeof userInput === "string") {
@@ -10,12 +11,10 @@ if (typeof userInput === "string") {
 else {
     console.log("not str");
 }
-// userName = userInput;
-// // Type 'unknown' is not assignable to type 'string'.ts(2322)
-// console.log(userName);
 anyUserInput = 10;
 console.log(anyUserInput);
 anyUserInput = "hihi";
 console.log(typeof anyUserInput);
 userName = anyUserInput;
 console.log(anyUserInput);
+//# sourceMappingURL=unknown.js.map
