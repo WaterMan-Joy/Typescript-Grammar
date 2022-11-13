@@ -17,4 +17,11 @@ const addArray = (...numbers: number[]) => {
   });
 };
 
+const addArray2 = (...numbers: [number, number, number]) => {
+  return numbers.reduce((curResult, curValue) => {
+    return curResult + curValue;
+  });
+};
+
 const addNumber = addArray(1, 2, 3, 4, 5);
+const addNumber2 = addArray2(1, 2, 3);
