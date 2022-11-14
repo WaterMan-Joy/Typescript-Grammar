@@ -1,4 +1,4 @@
-const hobbies = ["swimming", "codding"];
+const hobbies = ["swimming", "codding", "climming", "arting"];
 const activeHobbiew = ["swimming"];
 
 activeHobbiew.push(...hobbies);
@@ -25,3 +25,5 @@ const addArray2 = (...numbers: [number, number, number]) => {
 
 const addNumber = addArray(1, 2, 3, 4, 5);
 const addNumber2 = addArray2(1, 2, 3);
+
+const [ho1, ho2, ...ranHo] = hobbies;
