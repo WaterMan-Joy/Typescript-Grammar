@@ -31,14 +31,30 @@ class ITPerson extends Person {
 }
 
 class acountingPerson extends Person {
-  private report: string[];
-  constructor(id: string, report: string[]) {
+  lastReport: string;
+
+  get mostRecentReport() {
+    if (this.lastReport) {
+      return this.lastReport;
+    }
+    throw new Error("Not last report");
+  }
+
+  set mostRecentReport(value: string) {
+    if (!value) {
+      throw new Error("Not found add report value");
+    }
+    this.addReport(value);
+  }
+
+  constructor(id: string, private report: string[]) {
     super(id, "t1");
-    this.report = report;
+    this.lastReport = report[0];
   }
 
   addReport(add: string) {
     this.report.push(add);
+    this.lastReport = add;
   }
   printReport() {
     console.log(this.report.length);
@@ -57,16 +73,21 @@ person1.describe();
 
 // const personCopy = { name: "Jo", describe: person1.describe };
 // personCopy.describe();
-person1.emptyAdd("aa");
+// person1.emptyAdd("aa");
 
-person1.printEmptyInformaion();
+// person1.printEmptyInformaion();
 // person1.name = "a";
-console.log(person1.name);
-console.log(person1);
+// console.log(person1.name);
+// console.log(person1);
 
-const person2 = new acountingPerson("id2", ["re1", "rew2"]);
-person2.addReport("asdasdas");
-person2.addReport("a");
+const person2 = new acountingPerson("id2", ["re1", "re2"]);
+console.log("last : ", person2.lastReport);
+person2.addReport("re3");
+person2.addReport("re4");
+person2.addReport("re5");
 person2.addEmpty("c");
 person2.printReport();
 console.log(person2);
+console.log("-----------");
+console.log(person2.mostRecentReport);
+person2.mostRecentReport = "";

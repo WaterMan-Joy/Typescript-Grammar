@@ -28,9 +28,23 @@ class acountingPerson extends Person {
     constructor(id, report) {
         super(id, "t1");
         this.report = report;
+        this.lastReport = report[0];
+    }
+    get mostRecentReport() {
+        if (this.lastReport) {
+            return this.lastReport;
+        }
+        throw new Error("Not last report");
+    }
+    set mostRecentReport(value) {
+        if (!value) {
+            throw new Error("Not found add report value");
+        }
+        this.addReport(value);
     }
     addReport(add) {
         this.report.push(add);
+        this.lastReport = add;
     }
     printReport() {
         console.log(this.report.length);
@@ -45,14 +59,15 @@ class acountingPerson extends Person {
 }
 const person1 = new ITPerson("conde id", ["a", "b"]);
 person1.describe();
-person1.emptyAdd("aa");
-person1.printEmptyInformaion();
-console.log(person1.name);
-console.log(person1);
-const person2 = new acountingPerson("id2", ["re1", "rew2"]);
-person2.addReport("asdasdas");
-person2.addReport("a");
+const person2 = new acountingPerson("id2", ["re1", "re2"]);
+console.log("last : ", person2.lastReport);
+person2.addReport("re3");
+person2.addReport("re4");
+person2.addReport("re5");
 person2.addEmpty("c");
 person2.printReport();
 console.log(person2);
+console.log("-----------");
+console.log(person2.mostRecentReport);
+person2.mostRecentReport = "";
 //# sourceMappingURL=class.js.map
