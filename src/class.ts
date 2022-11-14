@@ -21,8 +21,26 @@ class Person {
 }
 
 class ITPerson extends Person {
-  constructor(id: string, public admin: string[]) {
+  public admin: string[];
+  constructor(id: string, admin: string[]) {
     super(id, "hh");
+    this.admin = admin;
+  }
+}
+
+class acountingPerson extends Person {
+  private report: string[];
+  constructor(id: string, report: string[]) {
+    super(id, "t1");
+    this.report = report;
+  }
+
+  addReport(add: string) {
+    this.report.push(add);
+  }
+  printReport() {
+    console.log(this.report.length);
+    console.log(this.report);
   }
 }
 
@@ -37,3 +55,8 @@ person1.printEmptyInformaion();
 // person1.name = "a";
 console.log(person1.name);
 console.log(person1);
+
+const person2 = new acountingPerson("id2", ["re1", "rew2"]);
+person2.addReport("asdasdas");
+person2.printReport();
+console.log(person2);
