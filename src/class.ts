@@ -2,6 +2,7 @@ class Person {
   // private id: string;
   // public name: string;
   private emptyArray: string[] = [];
+  protected emptyArray2: string[] = [];
 
   constructor(private readonly id: string, public name: string) {
     // this.id = id;
@@ -12,6 +13,7 @@ class Person {
   }
   emptyAdd(add: string) {
     this.emptyArray.push(add);
+    this.emptyArray2.push(add);
   }
 
   printEmptyInformaion() {
@@ -42,6 +44,12 @@ class acountingPerson extends Person {
     console.log(this.report.length);
     console.log(this.report);
   }
+  addEmpty(name: string) {
+    if (name === "abc") {
+      return;
+    }
+    this.emptyArray2.push(name);
+  }
 }
 
 const person1 = new ITPerson("conde id", ["a", "b"]);
@@ -58,5 +66,7 @@ console.log(person1);
 
 const person2 = new acountingPerson("id2", ["re1", "rew2"]);
 person2.addReport("asdasdas");
+person2.addReport("a");
+person2.addEmpty("c");
 person2.printReport();
 console.log(person2);

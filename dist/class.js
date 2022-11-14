@@ -4,12 +4,14 @@ class Person {
         this.id = id;
         this.name = name;
         this.emptyArray = [];
+        this.emptyArray2 = [];
     }
     describe() {
         console.log(`person id : ${this.id}`);
     }
     emptyAdd(add) {
         this.emptyArray.push(add);
+        this.emptyArray2.push(add);
     }
     printEmptyInformaion() {
         console.log(this.emptyArray.length);
@@ -34,6 +36,12 @@ class acountingPerson extends Person {
         console.log(this.report.length);
         console.log(this.report);
     }
+    addEmpty(name) {
+        if (name === "abc") {
+            return;
+        }
+        this.emptyArray2.push(name);
+    }
 }
 const person1 = new ITPerson("conde id", ["a", "b"]);
 person1.describe();
@@ -43,6 +51,8 @@ console.log(person1.name);
 console.log(person1);
 const person2 = new acountingPerson("id2", ["re1", "rew2"]);
 person2.addReport("asdasdas");
+person2.addReport("a");
+person2.addEmpty("c");
 person2.printReport();
 console.log(person2);
 //# sourceMappingURL=class.js.map
