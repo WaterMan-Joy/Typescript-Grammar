@@ -1,73 +1,86 @@
 "use strict";
-class Person {
+class Department {
     constructor(id, name) {
         this.id = id;
         this.name = name;
-        this.emptyArray = [];
-        this.emptyArray2 = [];
+        this.employees = [];
+    }
+    static createEmployee(name) {
+        return { name: name };
+    }
+    addEmployee(employee) {
+        this.employees.push(employee);
+    }
+    printEmployeeInformation() {
+        console.log(this.employees.length);
+        console.log(this.employees);
+    }
+}
+Department.fiscalYear = 2022;
+class ITDepartment extends Department {
+    constructor(id, admins) {
+        super(id, "IT");
+        this.admins = admins;
     }
     describe() {
-        console.log(`person id : ${this.id}`);
-    }
-    emptyAdd(add) {
-        this.emptyArray.push(add);
-        this.emptyArray2.push(add);
-    }
-    printEmptyInformaion() {
-        console.log(this.emptyArray.length);
-        console.log(this.emptyArray);
+        console.log("IT Department - ID : " + this.id);
     }
 }
-class ITPerson extends Person {
-    constructor(id, admin) {
-        super(id, "hh");
-        this.admin = admin;
-    }
-}
-class acountingPerson extends Person {
-    constructor(id, report) {
-        super(id, "t1");
-        this.report = report;
-        this.lastReport = report[0];
+class AccountingDepartment extends Department {
+    constructor(id, reports) {
+        super(id, "Accounting");
+        this.reports = reports;
+        this.lastReport = reports[0];
     }
     get mostRecentReport() {
         if (this.lastReport) {
             return this.lastReport;
         }
-        throw new Error("Not last report");
+        throw new Error("No report found.");
     }
     set mostRecentReport(value) {
         if (!value) {
-            throw new Error("Not found add report value");
+            throw new Error("Please pass in a valid value!");
         }
         this.addReport(value);
     }
-    addReport(add) {
-        this.report.push(add);
-        this.lastReport = add;
+    static getInstance() {
+        if (AccountingDepartment.instance) {
+            return this.instance;
+        }
+        this.instance = new AccountingDepartment("d2", []);
+        return this.instance;
     }
-    printReport() {
-        console.log(this.report.length);
-        console.log(this.report);
+    describe() {
+        console.log("Accounting Department - ID: " + this.id);
     }
-    addEmpty(name) {
-        if (name === "abc") {
+    addEmployee(name) {
+        if (name === "Max") {
             return;
         }
-        this.emptyArray2.push(name);
+        this.employees.push(name);
+    }
+    addReport(text) {
+        this.reports.push(text);
+        this.lastReport = text;
+    }
+    printReports() {
+        console.log(this.reports);
     }
 }
-const person1 = new ITPerson("conde id", ["a", "b"]);
-person1.describe();
-const person2 = new acountingPerson("id2", ["re1", "re2"]);
-console.log("last : ", person2.lastReport);
-person2.addReport("re3");
-person2.addReport("re4");
-person2.addReport("re5");
-person2.addEmpty("c");
-person2.printReport();
-console.log(person2);
-console.log("-----------");
-console.log(person2.mostRecentReport);
-person2.mostRecentReport = "";
+const employee1 = Department.createEmployee("Joy");
+console.log(employee1);
+console.log("=================");
+const it = new ITDepartment("d1", []);
+it.addEmployee("A");
+it.addEmployee("B");
+it.describe();
+it.printEmployeeInformation();
+console.log(it);
+console.log("=================");
+const accounting1 = AccountingDepartment.getInstance();
+const accounting2 = AccountingDepartment.getInstance();
+console.log(accounting1);
+console.log(accounting2);
+accounting1.describe();
 //# sourceMappingURL=class.js.map

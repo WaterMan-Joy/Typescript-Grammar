@@ -1,93 +1,98 @@
-class Person {
-  // private id: string;
-  // public name: string;
-  private emptyArray: string[] = [];
-  protected emptyArray2: string[] = [];
+class Department {
+  static fiscalYear = 2022;
+  protected employees: string[] = [];
+  constructor(protected readonly id: string, public name: string) {}
 
-  constructor(private readonly id: string, public name: string) {
-    // this.id = id;
-    // this.name = n;
-  }
-  describe(this: Person) {
-    console.log(`person id : ${this.id}`);
-  }
-  emptyAdd(add: string) {
-    this.emptyArray.push(add);
-    this.emptyArray2.push(add);
+  static createEmployee(name: string) {
+    return { name: name };
   }
 
-  printEmptyInformaion() {
-    console.log(this.emptyArray.length);
-    console.log(this.emptyArray);
+  addEmployee(employee: string) {
+    this.employees.push(employee);
+  }
+
+  printEmployeeInformation() {
+    console.log(this.employees.length);
+    console.log(this.employees);
   }
 }
 
-class ITPerson extends Person {
-  public admin: string[];
-  constructor(id: string, admin: string[]) {
-    super(id, "hh");
-    this.admin = admin;
+class ITDepartment extends Department {
+  admins: string[];
+  constructor(id: string, admins: string[]) {
+    super(id, "IT");
+    this.admins = admins;
+  }
+  describe() {
+    console.log("IT Department - ID : " + this.id);
   }
 }
 
-class acountingPerson extends Person {
-  lastReport: string;
+class AccountingDepartment extends Department {
+  private lastReport: string;
+  private static instance: AccountingDepartment;
 
   get mostRecentReport() {
     if (this.lastReport) {
       return this.lastReport;
     }
-    throw new Error("Not last report");
+    throw new Error("No report found.");
   }
 
   set mostRecentReport(value: string) {
     if (!value) {
-      throw new Error("Not found add report value");
+      throw new Error("Please pass in a valid value!");
     }
     this.addReport(value);
   }
 
-  constructor(id: string, private report: string[]) {
-    super(id, "t1");
-    this.lastReport = report[0];
+  private constructor(id: string, private reports: string[]) {
+    super(id, "Accounting");
+    this.lastReport = reports[0];
   }
 
-  addReport(add: string) {
-    this.report.push(add);
-    this.lastReport = add;
+  static getInstance() {
+    if (AccountingDepartment.instance) {
+      return this.instance;
+    }
+    this.instance = new AccountingDepartment("d2", []);
+    return this.instance;
   }
-  printReport() {
-    console.log(this.report.length);
-    console.log(this.report);
+
+  describe() {
+    console.log("Accounting Department - ID: " + this.id);
   }
-  addEmpty(name: string) {
-    if (name === "abc") {
+
+  addEmployee(name: string) {
+    if (name === "Max") {
       return;
     }
-    this.emptyArray2.push(name);
+    this.employees.push(name);
+  }
+
+  addReport(text: string) {
+    this.reports.push(text);
+    this.lastReport = text;
+  }
+
+  printReports() {
+    console.log(this.reports);
   }
 }
 
-const person1 = new ITPerson("conde id", ["a", "b"]);
-person1.describe();
+const employee1 = Department.createEmployee("Joy");
+console.log(employee1);
+console.log("=================");
+const it = new ITDepartment("d1", []);
+it.addEmployee("A");
+it.addEmployee("B");
+it.describe();
+it.printEmployeeInformation();
+console.log(it);
+console.log("=================");
 
-// const personCopy = { name: "Jo", describe: person1.describe };
-// personCopy.describe();
-// person1.emptyAdd("aa");
-
-// person1.printEmptyInformaion();
-// person1.name = "a";
-// console.log(person1.name);
-// console.log(person1);
-
-const person2 = new acountingPerson("id2", ["re1", "re2"]);
-console.log("last : ", person2.lastReport);
-person2.addReport("re3");
-person2.addReport("re4");
-person2.addReport("re5");
-person2.addEmpty("c");
-person2.printReport();
-console.log(person2);
-console.log("-----------");
-console.log(person2.mostRecentReport);
-person2.mostRecentReport = "";
+const accounting1 = AccountingDepartment.getInstance();
+const accounting2 = AccountingDepartment.getInstance();
+console.log(accounting1);
+console.log(accounting2);
+accounting1.describe();
