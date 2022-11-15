@@ -96,3 +96,15 @@ const accounting2 = AccountingDepartment.getInstance();
 console.log(accounting1);
 console.log(accounting2);
 accounting1.describe();
+
+// class Person {
+//   protected readonly age: number;
+//   constructor(public readonly name: string) {
+//     this.age = 30;
+//   }
+// }
+
+// const p1 = new Person("aa");
+// console.log(p1);
+// console.log(p1.name);
+// console.log("======================");
