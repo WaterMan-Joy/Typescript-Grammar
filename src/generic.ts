@@ -129,3 +129,6 @@ function createCourseGoal(
     (courseGoal.completeUntil = completeUntil);
   return courseGoal as CourseGoal;
 }
+const name1: Readonly<number[]> = [];
+// name1.push(20);
+console.log(name1);

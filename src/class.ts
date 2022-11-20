@@ -108,3 +108,21 @@ accounting1.describe();
 // console.log(p1);
 // console.log(p1.name);
 // console.log("======================");
+
+console.log("**************");
+
+function Logger(cusString: string) {
+  return function (constructor: Function) {
+    console.log(cusString);
+    console.log(constructor);
+  };
+}
+@Logger("Person2 Logging")
+class Person2 {
+  name = "Joy";
+  constructor() {
+    console.log("Hi");
+  }
+}
+const pers1 = new Person2();
+console.log(pers1);

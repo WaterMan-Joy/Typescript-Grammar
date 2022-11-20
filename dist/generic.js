@@ -84,4 +84,6 @@ function createCourseGoal(title, description, completeUntil) {
         (courseGoal.completeUntil = completeUntil);
     return courseGoal;
 }
+const name1 = [];
+console.log(name1);
 //# sourceMappingURL=generic.js.map
