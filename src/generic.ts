@@ -60,3 +60,72 @@ function extractAndConvert<T extends object, U extends keyof T>(
 
 const e2 = extractAndConvert({ name: "Joy" }, "name");
 console.log(e2);
+
+console.log("=============");
+
+class DataStorage<T extends string | number | boolean | object> {
+  private data: T[] = [];
+  addItem(item: T) {
+    this.data.push(item);
+  }
+  removoeItem(item: T) {
+    if (this.data.indexOf(item) === -1) {
+      return;
+    }
+    this.data.splice(this.data.indexOf(item), 1);
+  }
+  getItems() {
+    return [...this.data];
+  }
+}
+
+const textDataStorage = new DataStorage<string>();
+textDataStorage.addItem("A");
+textDataStorage.addItem("B");
+textDataStorage.addItem("C");
+textDataStorage.removoeItem("B");
+const all = textDataStorage.getItems();
+console.log(all);
+console.log(textDataStorage);
+console.log("=================");
+
+const numberDataStorage = new DataStorage<number | string>();
+numberDataStorage.addItem(10);
+numberDataStorage.addItem(2);
+numberDataStorage.addItem("Hi");
+numberDataStorage.addItem("ABC");
+numberDataStorage.removoeItem(10);
+const all2 = numberDataStorage.getItems();
+console.log(all2);
+console.log("*****objDataStorage*****");
+
+const objDataStorage = new DataStorage<object>();
+const myObj = { name: "Joy" };
+console.log(myObj);
+console.log(objDataStorage);
+objDataStorage.addItem({ name: "Joy" });
+objDataStorage.addItem({ name: "Han" });
+objDataStorage.addItem({ name: "Kim" });
+objDataStorage.removoeItem(myObj);
+console.log(myObj);
+const all3 = objDataStorage.getItems();
+console.log(all3);
+
+console.log("*****CourseGoal*****");
+interface CourseGoal {
+  title: string;
+  description: string;
+  completeUntil: Date;
+}
+
+function createCourseGoal(
+  title: string,
+  description: string,
+  completeUntil: Date
+): CourseGoal {
+  let courseGoal: Partial<CourseGoal> = {};
+  (courseGoal.title = title),
+    (courseGoal.description = description),
+    (courseGoal.completeUntil = completeUntil);
+  return courseGoal as CourseGoal;
+}
