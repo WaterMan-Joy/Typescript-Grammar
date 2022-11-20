@@ -23,4 +23,10 @@ function countAndDescription(element) {
 }
 const c1 = countAndDescription("gigi");
 console.log(c1);
+console.log("===========");
+function extractAndConvert(obj, key) {
+    return obj[key];
+}
+const e2 = extractAndConvert({ name: "Joy" }, "name");
+console.log(e2);
 //# sourceMappingURL=generic.js.map

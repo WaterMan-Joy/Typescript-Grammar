@@ -48,3 +48,15 @@ function countAndDescription<T extends lengthy>(element: T): [T, string] {
 }
 const c1 = countAndDescription("gigi");
 console.log(c1);
+
+console.log("===========");
+
+function extractAndConvert<T extends object, U extends keyof T>(
+  obj: T,
+  key: U
+) {
+  return obj[key];
+}
+
+const e2 = extractAndConvert({ name: "Joy" }, "name");
+console.log(e2);
