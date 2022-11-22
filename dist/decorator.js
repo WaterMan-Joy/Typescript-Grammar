@@ -127,10 +127,18 @@ const btn = document.getElementById("decoratorButton");
 btn === null || btn === void 0 ? void 0 : btn.addEventListener("click", printBtn.showMessage);
 const registeredValidator = {};
 function Required1(target, propertyName) {
-    registeredValidator[target.constructor.name] = Object.assign(Object.assign({}, registeredValidator[target.constructor.name]), { [propertyName]: ["required"] });
+    var _a, _b;
+    registeredValidator[target.constructor.name] = Object.assign(Object.assign({}, registeredValidator[target.constructor.name]), { [propertyName]: [
+            ...((_b = (_a = registeredValidator[target.constructor.name]) === null || _a === void 0 ? void 0 : _a[propertyName]) !== null && _b !== void 0 ? _b : []),
+            "required",
+        ] });
 }
 function PositiveNumber(target, propertyName) {
-    registeredValidator[target.constructor.name] = Object.assign(Object.assign({}, registeredValidator[target.constructor.name]), { [propertyName]: ["positive"] });
+    var _a, _b;
+    registeredValidator[target.constructor.name] = Object.assign(Object.assign({}, registeredValidator[target.constructor.name]), { [propertyName]: [
+            ...((_b = (_a = registeredValidator[target.constructor.name]) === null || _a === void 0 ? void 0 : _a[propertyName]) !== null && _b !== void 0 ? _b : []),
+            "positive",
+        ] });
 }
 function Validate(obj) {
     const objValidatorConfig = registeredValidator[obj.constructor.name];
@@ -141,6 +149,7 @@ function Validate(obj) {
     for (const property in objValidatorConfig) {
         console.log(property);
         for (const validator of objValidatorConfig[property]) {
+            console.log(validator);
             switch (validator) {
                 case "required":
                     isValid = isValid && !!obj[property];

@@ -141,13 +141,19 @@ const registeredValidator: ValidatorConfig = {};
 function Required1(target: any, propertyName: string): void {
   registeredValidator[target.constructor.name] = {
     ...registeredValidator[target.constructor.name],
-    [propertyName]: ["required"],
+    [propertyName]: [
+      ...(registeredValidator[target.constructor.name]?.[propertyName] ?? []),
+      "required",
+    ],
   };
 }
 function PositiveNumber(target: any, propertyName: string): void {
   registeredValidator[target.constructor.name] = {
     ...registeredValidator[target.constructor.name],
-    [propertyName]: ["positive"],
+    [propertyName]: [
+      ...(registeredValidator[target.constructor.name]?.[propertyName] ?? []),
+      "positive",
+    ],
   };
 }
 function Validate(obj: any): boolean {
@@ -159,6 +165,7 @@ function Validate(obj: any): boolean {
   for (const property in objValidatorConfig) {
     console.log(property);
     for (const validator of objValidatorConfig[property]) {
+      console.log(validator);
       switch (validator) {
         case "required":
           isValid = isValid && !!obj[property];
